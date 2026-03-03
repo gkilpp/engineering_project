@@ -1,5 +1,6 @@
 WITH hourly_raw AS (
         SELECT
+
                 airport_code,
                 station_id,
                 JSON_ARRAY_ELEMENTS(extracted_data -> 'data') AS json_data
@@ -24,4 +25,4 @@ WITH hourly_raw AS (
         FROM hourly_raw
     )
     SELECT * 
-    FROM clear_skies.weather_hourly_katrina_raw
+    FROM hourly_data
