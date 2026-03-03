@@ -1,4 +1,3 @@
-{{ config(materialized='view') }}
 
 WITH flights_three_months AS (
     SELECT *
