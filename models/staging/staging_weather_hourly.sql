@@ -9,7 +9,7 @@ WITH hourly_raw AS (
         SELECT  
                 airport_code
                 ,station_id
-                ,"time"::TIMESTAMP AS timestamp	
+                ,'time'::TIMESTAMP AS timestamp	
                 ,temp::NUMERIC AS temp_c
                 ,dwpt::NUMERIC AS dewpoint_c
                 ,rhum::NUMERIC AS humidity_perc
