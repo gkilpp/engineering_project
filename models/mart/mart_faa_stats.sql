@@ -1,4 +1,4 @@
-ITH flights AS (
+WITH flights AS (
     SELECT *
     FROM {{ ref('prep_flights') }}
 ),
