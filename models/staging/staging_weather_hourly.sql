@@ -1,25 +1,26 @@
 WITH hourly_raw AS (
         SELECT
-
-                airport_faa as airport_code,
-                station as station_id
-        FROM {{source('weather_data', 'weather_hourly_katrina_raw')}}
+                airport_code,
+                station_id,
+                JSON_ARRAY_ELEMENTS(extracted_data -> 'data') AS json_data
+        FROM {{source('weather_data', 'weather_hourly_raw')}}
     ),
     hourly_data AS (
         SELECT  
                 airport_code
                 ,station_id
-                ,temp::NUMERIC AS temp_c
-                ,dwpt::NUMERIC AS dewpoint_c
-                ,rhum::NUMERIC AS humidity_perc
-                ,prcp::NUMERIC AS precipitation_mm
-                ,snow::INTEGER AS snow_mm
-                ,wdir::NUMERIC::INTEGER AS wind_direction
-                ,wspd::NUMERIC AS wind_speed_kmh
-                ,wpgt::NUMERIC AS wind_peakgust_kmh
-                ,pres::NUMERIC AS pressure_hpa 
-                ,tsun::INTEGER AS sun_minutes
-                ,coco::INTEGER AS condition_code
+                ,(json_data->>'time')::TIMESTAMP AS timestamp	
+                ,(json_data->>'temp')::NUMERIC AS temp_c
+                ,(json_data->>'dwpt')::NUMERIC AS dewpoint_c
+                ,(json_data->>'rhum')::NUMERIC AS humidity_perc
+                ,(json_data->>'prcp')::NUMERIC AS precipitation_mm
+                ,(json_data->>'snow')::INTEGER AS snow_mm
+                ,((json_data->>'wdir')::NUMERIC)::INTEGER AS wind_direction
+                ,(json_data->>'wspd')::NUMERIC AS wind_speed_kmh
+                ,(json_data->>'wpgt')::NUMERIC AS wind_peakgust_kmh
+                ,(json_data->>'pres')::NUMERIC AS pressure_hpa 
+                ,(json_data->>'tsun')::INTEGER AS sun_minutes
+                ,(json_data->>'coco')::INTEGER AS condition_code
         FROM hourly_raw
     )
     SELECT * 

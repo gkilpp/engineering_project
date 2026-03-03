@@ -5,7 +5,7 @@ sources:
     schema: clear_skies
     tables:
       - name: weather_daily_raw
-      - name: weather_hourly_katrina_raw
+      - name: weather_hourly_raw
 
   - name: flights_data
     schema: clear_skies
