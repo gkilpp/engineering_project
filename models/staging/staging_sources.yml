@@ -8,9 +8,15 @@ sources:
       - name: weather_hourly_raw
 
   - name: flights_data
-    schema: public
+    schema: clear_skies
     tables:
-      - name: flights
-      - name: airports
+      - name: flights_raw
+      - name: airports_raw
       - name: regions
+      
+  - name: regions_data
+    schema: public 
+    tables:
+      - name: regions
+
     

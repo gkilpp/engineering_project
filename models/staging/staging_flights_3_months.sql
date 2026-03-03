@@ -1,7 +1,7 @@
 
 WITH flights_three_months AS (
     SELECT *
-FROM {{ source('flights_data', 'flights') }}
+FROM {{ source('flights_data', 'flights_raw') }}
 WHERE flight_date >= '2005-07-01'
   AND flight_date <  '2005-10-01'
     )
