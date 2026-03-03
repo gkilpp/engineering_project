@@ -4,7 +4,7 @@ WITH flights_daily AS (
 
     SELECT
         flight_date AS day,
-        airport_code AS airport,
+        origin AS airport,
         COUNT(*) AS flights,
         AVG(cancelled::int) AS cancel_rate
     FROM {{ ref('stg_flights') }}
